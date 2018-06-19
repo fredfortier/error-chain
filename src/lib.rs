@@ -549,6 +549,7 @@ use std::iter::Iterator;
 #[cfg(feature = "backtrace")]
 use std::sync::Arc;
 use std::fmt;
+use std::boxed::Box;
 
 #[cfg(feature = "backtrace")]
 pub use backtrace::Backtrace;

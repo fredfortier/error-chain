@@ -863,9 +863,9 @@ macro_rules! ensure {
     };
 }
 
-#[doc(hidden)]
 // TODO: Fix error_chain
 /*
+#[doc(hidden)]
 pub mod mock {
     error_chain!{}
 }

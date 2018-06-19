@@ -537,6 +537,10 @@
 //! [`BacktraceFrame`]: https://docs.rs/backtrace/0.3.2/backtrace/struct.BacktraceFrame.html
 
 
+#![no_std]
+#[macro_use]
+extern crate sgx_tstd as std;
+
 #[cfg(feature = "backtrace")]
 extern crate backtrace;
 

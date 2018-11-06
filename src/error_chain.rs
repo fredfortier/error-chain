@@ -167,14 +167,20 @@ macro_rules! impl_error_chain_processed {
                 where F: FnOnce() -> EK, EK: Into<$error_kind_name> {
                 $error_name::with_chain(self, Self::from_kind(error().into()))
             }
+
+            /// A short description of the error.
+            /// This method is identical to [`Error::description()`](https://doc.rust-lang.org/nightly/std/error/trait.Error.html#tymethod.description)
+            pub fn description(&self) -> &str {
+                self.0.description()
+            }
         }
 
         impl ::std::error::Error for $error_name {
             fn description(&self) -> &str {
-                self.0.description()
+                self.description()
             }
 
-            #[allow(unknown_lints, unused_doc_comment)]
+            #[allow(unknown_lints, renamed_and_removed_lints, unused_doc_comment, unused_doc_comments)]
             fn cause(&self) -> Option<&::std::error::Error> {
                 match self.1.next_error {
                     Some(ref c) => Some(&**c),
@@ -237,14 +243,6 @@ macro_rules! impl_error_chain_processed {
         impl From<String> for $error_name {
             fn from(s: String) -> Self {
                 $error_name::from_kind(s.into())
-            }
-        }
-
-        impl ::std::ops::Deref for $error_name {
-            type Target = $error_kind_name;
-
-            fn deref(&self) -> &Self::Target {
-                &self.0
             }
         }
 
@@ -420,40 +418,25 @@ macro_rules! error_chain {
 /// for more details.
 #[macro_export]
 #[doc(hidden)]
-#[cfg(feature = "backtrace")]
 macro_rules! impl_extract_backtrace {
     ($error_name: ident
      $error_kind_name: ident
      $([$link_error_path: path, $(#[$meta_links: meta])*])*) => {
-        #[allow(unknown_lints, unused_doc_comment)]
+        #[allow(unknown_lints, renamed_and_removed_lints, unused_doc_comment, unused_doc_comments)]
         fn extract_backtrace(e: &(::std::error::Error + Send + 'static))
-            -> Option<::std::sync::Arc<$crate::Backtrace>> {
+            -> Option<$crate::InternalBacktrace> {
             if let Some(e) = e.downcast_ref::<$error_name>() {
-                return e.1.backtrace.clone();
+                return Some(e.1.backtrace.clone());
             }
             $(
                 $( #[$meta_links] )*
                 {
                     if let Some(e) = e.downcast_ref::<$link_error_path>() {
-                        return e.1.backtrace.clone();
+                        return Some(e.1.backtrace.clone());
                     }
                 }
             ) *
             None
         }
     }
-}
-
-/// Macro used to manage the `backtrace` feature.
-///
-/// See
-/// https://www.reddit.com/r/rust/comments/57virt/hey_rustaceans_got_an_easy_question_ask_here/da5r4ti/?context=3
-/// for more details.
-#[macro_export]
-#[doc(hidden)]
-#[cfg(not(feature = "backtrace"))]
-macro_rules! impl_extract_backtrace {
-    ($error_name: ident
-     $error_kind_name: ident
-     $([$link_error_path: path, $(#[$meta_links: meta])*])*) => {}
 }

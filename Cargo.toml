@@ -25,7 +25,5 @@ example_generated = []
 [dependencies]
 backtrace = { version = "0.3.3", optional = true }
 
-[target.'cfg(not(target_env = "sgx"))'.dependencies.sgx_tstd]
-git = "https://github.com/baidu/rust-sgx-sdk.git"
-rev = "v1.0.4"
+sgx_tstd = { git = "https://github.com/baidu/rust-sgx-sdk.git", rev = "v1.0.4" }
 

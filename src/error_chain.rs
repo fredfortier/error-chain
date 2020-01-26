@@ -1,6 +1,4 @@
 /// Prefer to use `error_chain` instead of this macro.
-#[doc(hidden)]
-use std::boxed::Box;
 #[macro_export]
 macro_rules! impl_error_chain_processed {
     // Default values for `types`.

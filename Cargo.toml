@@ -23,5 +23,5 @@ default = ["example_generated"]
 example_generated = []
 
 [dependencies]
-backtrace = "0.3.48"
+#local_backtrace = { package = "backtrace", version = "0.3.48" }
 sgx_tstd = { git = "https://github.com/apache/teaclave-sgx-sdk.git", rev = "v1.1.2" , features = ["backtrace"] }

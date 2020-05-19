@@ -538,7 +538,7 @@
 #![no_std]
 #[macro_use]
 extern crate sgx_tstd as std;
-extern crate backtrace as nonstd_backtrace;
+extern crate local_backtrace;
 
 use std::error;
 use std::iter::Iterator;
@@ -555,10 +555,10 @@ pub use quick_main::ExitCode;
 #[cfg(feature = "example_generated")]
 pub mod example_generated;
 mod backtrace;
-pub use backtrace::Backtrace;
+// pub use backtrace::Backtrace;
 use std::backtrace::Backtrace;
 #[doc(hidden)]
-pub use nonstd_backtrace::InternalBacktrace;
+pub use std::backtrace::InternalBacktrace;
 
 #[derive(Debug)]
 /// Iterator over the error chain using the `Error::cause()` method.

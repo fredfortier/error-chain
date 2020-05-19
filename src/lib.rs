@@ -538,7 +538,6 @@
 #![no_std]
 #[macro_use]
 extern crate sgx_tstd as std;
-extern crate local_backtrace;
 
 use std::error;
 use std::iter::Iterator;

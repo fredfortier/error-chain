@@ -2,7 +2,7 @@ pub use self::imp::{Backtrace, InternalBacktrace};
 
 #[cfg(feature = "backtrace")]
 mod imp {
-    extern crate backtrace;
+    // extern crate backtrace;
 
     use std::cell::UnsafeCell;
     use std::env;
@@ -26,6 +26,7 @@ mod imp {
     unsafe impl Sync for MaybeResolved {}
 
     pub use self::backtrace::Backtrace;
+    use std::backtrace::Backtrace;
 
     impl InternalBacktrace {
         /// Returns a backtrace of the current call stack if `RUST_BACKTRACE`

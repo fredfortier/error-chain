@@ -25,4 +25,4 @@ example_generated = []
 [dependencies]
 backtrace = { version = "0.3.3", optional = true }
 
-sgx_tstd = { git = "https://github.com/apache/teaclave-sgx-sdk.git", rev = "v1.1.0" }
+sgx_tstd = { git = "https://github.com/apache/teaclave-sgx-sdk.git", rev = "v1.1.2" }

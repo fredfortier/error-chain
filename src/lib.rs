@@ -556,7 +556,7 @@ pub use quick_main::ExitCode;
 pub mod example_generated;
 mod backtrace;
 // pub use backtrace::Backtrace;
-use std::backtrace::Backtrace;
+pub use std::backtrace::Backtrace;
 #[doc(hidden)]
 pub use std::backtrace::InternalBacktrace;
 

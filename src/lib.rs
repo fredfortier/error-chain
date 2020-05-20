@@ -648,7 +648,7 @@ impl<'a, T> fmt::Display for DisplayChain<'a, T>
            writeln!(fmt, "Caused by: {}", e)?;
         }
 
-        if let Some(backtrace) = std::error::Error::backtrace(&self.0) {
+        if let Some(backtrace) = std::error::Error::backtrace(self.0) {
             writeln!(fmt, "{:?}", backtrace)?;
         }
 

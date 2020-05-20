@@ -557,7 +557,7 @@ mod backtrace;
 // pub use backtrace::Backtrace;
 pub use std::backtrace::Backtrace;
 #[doc(hidden)]
-pub use std::backtrace::InternalBacktrace;
+pub use backtrace::InternalBacktrace;
 
 #[derive(Debug)]
 /// Iterator over the error chain using the `Error::cause()` method.

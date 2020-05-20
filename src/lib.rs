@@ -558,6 +558,7 @@ mod backtrace;
 pub use std::backtrace::Backtrace;
 #[doc(hidden)]
 pub use backtrace::InternalBacktrace;
+use std::error::Error;
 
 #[derive(Debug)]
 /// Iterator over the error chain using the `Error::cause()` method.
@@ -647,7 +648,7 @@ impl<'a, T> fmt::Display for DisplayChain<'a, T>
            writeln!(fmt, "Caused by: {}", e)?;
         }
 
-        if let Some(backtrace) = self.0.backtrace() {
+        if let Some(backtrace) = std::error::Error::backtrace(&self.0) {
             writeln!(fmt, "{:?}", backtrace)?;
         }
 

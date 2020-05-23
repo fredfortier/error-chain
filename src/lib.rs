@@ -554,8 +554,7 @@ pub use quick_main::ExitCode;
 #[cfg(feature = "example_generated")]
 pub mod example_generated;
 mod backtrace;
-// pub use backtrace::Backtrace;
-pub use std::backtrace::Backtrace;
+pub use backtrace::Backtrace;
 #[doc(hidden)]
 pub use backtrace::InternalBacktrace;
 use std::error::Error;
